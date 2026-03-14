@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苦力怕编程站 · MC Python</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">⛏ 苦力怕<span>编程站</span></a>
+  <div class="nav-links">
+    <a href="projects.html">我的项目</a>
+    <a href="news.html">MC资讯</a>
+    <a href="about.html">关于</a>
+    <a href="write.html" class="nav-write">+ 记录</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-pixel-row">
+      <div class="pixel-block" style="background:#5d8a3c"></div>
+      <div class="pixel-block" style="background:#4a7a2e"></div>
+      <div class="pixel-block" style="background:#8B5E3C"></div>
+      <div class="pixel-block" style="background:#5d8a3c"></div>
+      <div class="pixel-block" style="background:#4a7a2e"></div>
+      <div class="pixel-block" style="background:#5d8a3c"></div>
+      <div class="pixel-block" style="background:#8B5E3C"></div>
+      <div class="pixel-block" style="background:#4a7a2e"></div>
+    </div>
+    <h1>用代码<br>玩转<em>我的世界</em></h1>
+    <p class="hero-sub">13岁 MC 玩家学 Python 编程的实战记录 — 跟着苦力怕老师，用代码实现一切想法</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-n" id="stat-projects">0</span>
+        <span class="stat-l">项目数</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n" id="stat-steps">0</span>
+        <span class="stat-l">完成步骤</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n" id="stat-news">0</span>
+        <span class="stat-l">资讯篇</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="two-col">
+    <div class="col-left">
+      <div class="section-head">
+        <span class="tag tag-green">最新项目进度</span>
+        <a href="projects.html" class="see-all">全部 →</a>
+      </div>
+      <div id="projects-feed">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="section-head">
+        <span class="tag tag-sky">MC每日资讯</span>
+        <a href="news.html" class="see-all">全部 →</a>
+      </div>
+      <div id="news-feed">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="posts-section">
+    <div class="section-head">
+      <span class="tag tag-gray">编程日记</span>
+      <a href="write.html" class="see-all">写点什么 →</a>
+    </div>
+    <div id="posts-feed" class="posts-grid">
+      <div class="loading">加载中…</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>⛏ 苦力怕编程站 · MC Python</span>
+  <span>Powered by Claude + Netlify + Neon</span>
+</footer>
+
+<script src="js/main.js"></script>
+<script>loadHome();</script>
+</body>
+</html>

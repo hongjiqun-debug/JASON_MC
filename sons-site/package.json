@@ -1,0 +1,8 @@
+{
+  "name": "sons-site",
+  "version": "1.0.0",
+  "description": "MC coding learning site",
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}

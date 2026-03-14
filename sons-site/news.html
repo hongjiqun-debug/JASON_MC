@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC资讯 · 苦力怕编程站</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">⛏ 苦力怕<span>编程站</span></a>
+  <div class="nav-links">
+    <a href="projects.html">我的项目</a>
+    <a href="news.html" class="active">MC资讯</a>
+    <a href="about.html">关于</a>
+    <a href="write.html" class="nav-write">+ 记录</a>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <span class="tag tag-sky">每日MC资讯</span>
+    <h2>史蒂夫记者<em>每日播报</em></h2>
+    <p>由AI助手「史蒂夫记者」每天搜集整理的MC最新内容——新模组、新地图、今日挑战，全都有！</p>
+  </section>
+
+  <div id="news-list" class="log-list">
+    <div class="loading">加载中…</div>
+  </div>
+</main>
+
+<footer>
+  <span>⛏ 苦力怕编程站 · MC Python</span>
+  <span>Powered by Claude + Netlify + Neon</span>
+</footer>
+
+<script src="js/main.js"></script>
+<script>loadNews();</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的项目 · 苦力怕编程站</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">⛏ 苦力怕<span>编程站</span></a>
+  <div class="nav-links">
+    <a href="projects.html" class="active">我的项目</a>
+    <a href="news.html">MC资讯</a>
+    <a href="about.html">关于</a>
+    <a href="write.html" class="nav-write">+ 记录</a>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <span class="tag tag-green">MC编程项目</span>
+    <h2>用代码<em>实现想法</em></h2>
+    <p>跟苦力怕老师学习，每个功能拆解成5步，一步一步完成。代码跑起来的感觉太好了！</p>
+  </section>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>假期项目进度</span>
+      <span id="progress-text">0 / 3 个项目</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-projects">
+      <span>自动农场</span>
+      <span>怪物AI</span>
+      <span>小游戏</span>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" data-project="all">全部</button>
+    <button class="filter-btn" data-project="自动收割农场">自动农场</button>
+    <button class="filter-btn" data-project="会移动的怪物AI">怪物AI</button>
+    <button class="filter-btn" data-project="我的世界小游戏">小游戏</button>
+  </div>
+
+  <div id="projects-list" class="log-list">
+    <div class="loading">加载中…</div>
+  </div>
+</main>
+
+<footer>
+  <span>⛏ 苦力怕编程站 · MC Python</span>
+  <span>Powered by Claude + Netlify + Neon</span>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  loadProjects();
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProjects(btn.dataset.project);
+    });
+  });
+</script>
+</body>
+</html>

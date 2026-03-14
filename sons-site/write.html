@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>记录今天 · 苦力怕编程站</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">⛏ 苦力怕<span>编程站</span></a>
+  <div class="nav-links">
+    <a href="projects.html">我的项目</a>
+    <a href="news.html">MC资讯</a>
+    <a href="about.html">关于</a>
+    <a href="write.html" class="nav-write active">+ 记录</a>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <span class="tag tag-gray">每日记录</span>
+    <h2>记录<em>今天</em></h2>
+    <p>把今天的编程成果、MC资讯和日记都存进来，网站自动更新。</p>
+  </section>
+
+  <div class="write-tabs">
+    <button class="write-tab active" data-form="project">项目进度</button>
+    <button class="write-tab" data-form="news">MC资讯</button>
+    <button class="write-tab" data-form="post">编程日记</button>
+  </div>
+
+  <!-- 项目进度表单 -->
+  <form id="form-project" class="write-form active">
+    <div class="form-group">
+      <label>项目名称</label>
+      <select id="p-name">
+        <option value="自动收割农场">自动收割农场</option>
+        <option value="会移动的怪物AI">会移动的怪物AI</option>
+        <option value="我的世界小游戏">我的世界小游戏</option>
+        <option value="其他项目">其他项目</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>今天完成了哪一步？</label>
+      <input type="text" id="p-step" placeholder="例如：第3步 — 加入成熟度判断" required>
+    </div>
+    <div class="form-group">
+      <label>核心代码（从MC粘贴过来）</label>
+      <textarea id="p-code" rows="6" class="code-input" placeholder="把今天写的关键代码粘贴在这里…"></textarea>
+    </div>
+    <div class="form-group">
+      <label>苦力怕老师的总结（从Coze复制）</label>
+      <textarea id="p-lesson" rows="4" placeholder="把AI助教的总结粘贴到这里…"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">保存到网站</button>
+    <div id="msg-project" class="form-msg"></div>
+  </form>
+
+  <!-- MC资讯表单 -->
+  <form id="form-news" class="write-form">
+    <div class="form-group">
+      <label>资讯标题</label>
+      <input type="text" id="n-title" placeholder="今天最有意思的MC新闻是？" required>
+    </div>
+    <div class="form-group">
+      <label>内容（从史蒂夫记者复制）</label>
+      <textarea id="n-content" rows="6" placeholder="把AI生成的资讯内容粘贴在这里…"></textarea>
+    </div>
+    <div class="form-group">
+      <label>今日MC挑战</label>
+      <input type="text" id="n-challenge" placeholder="例如：在创意模式里造一个全自动流水线">
+    </div>
+    <button type="submit" class="submit-btn">发布资讯</button>
+    <div id="msg-news" class="form-msg"></div>
+  </form>
+
+  <!-- 日记表单 -->
+  <form id="form-post" class="write-form">
+    <div class="form-group">
+      <label>类型</label>
+      <select id="d-type">
+        <option value="diary">编程日记</option>
+        <option value="project">项目相关</option>
+        <option value="news">MC相关</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>标题</label>
+      <input type="text" id="d-title" placeholder="今天想说什么？" required>
+    </div>
+    <div class="form-group">
+      <label>内容</label>
+      <textarea id="d-content" rows="6" placeholder="随便写…代码、想法、今天遇到的有趣的事"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">发布</button>
+    <div id="msg-post" class="form-msg"></div>
+  </form>
+</main>
+
+<footer>
+  <span>⛏ 苦力怕编程站 · MC Python</span>
+  <span>Powered by Claude + Netlify + Neon</span>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.querySelectorAll('.write-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.write-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.write-form').forEach(f => f.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('form-' + tab.dataset.form).classList.add('active');
+    });
+  });
+
+  document.getElementById('form-project').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('msg-project');
+    msg.textContent = '保存中…';
+    const ok = await saveEntry('mc_projects', {
+      project_name: document.getElementById('p-name').value,
+      step_done:    document.getElementById('p-step').value,
+      code_snippet: document.getElementById('p-code').value,
+      lesson:       document.getElementById('p-lesson').value,
+    });
+    msg.textContent = ok ? '✓ 已保存！去项目页看看' : '✗ 保存失败';
+    msg.className = 'form-msg ' + (ok ? 'ok' : 'err');
+    if (ok) e.target.reset();
+  });
+
+  document.getElementById('form-news').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('msg-news');
+    msg.textContent = '发布中…';
+    const ok = await saveEntry('mc_news', {
+      title:     document.getElementById('n-title').value,
+      content:   document.getElementById('n-content').value,
+      challenge: document.getElementById('n-challenge').value,
+    });
+    msg.textContent = ok ? '✓ 资讯已发布！' : '✗ 发布失败';
+    msg.className = 'form-msg ' + (ok ? 'ok' : 'err');
+    if (ok) e.target.reset();
+  });
+
+  document.getElementById('form-post').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('msg-post');
+    msg.textContent = '发布中…';
+    const ok = await saveEntry('posts', {
+      type:    document.getElementById('d-type').value,
+      title:   document.getElementById('d-title').value,
+      content: document.getElementById('d-content').value,
+    });
+    msg.textContent = ok ? '✓ 日记已发布！' : '✗ 发布失败';
+    msg.className = 'form-msg ' + (ok ? 'ok' : 'err');
+    if (ok) e.target.reset();
+  });
+</script>
+</body>
+</html>
